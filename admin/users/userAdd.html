@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="../assets/css/admin.css"> <!-- Archivo CSS externo -->
+</head>
+<body>
+    <header>
+        <h1>Panel de Administración</h1>
+        <nav>
+            <ul>
+                <li><a href="">Inicio</a></li>
+                <li><a href="">Cartas</a></li>
+                <li><a href="./users.php">Usuarios</a></li>
+                <li><a href="./userEdit.php">Editar usuarios</a></li>
+                <li><a href="">Configuración</a></li>
+                <li><a href="">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="dashboard-info">
+           <div class="form-container">
+            <h2>Añadir Usuario</h2>
+            <form action="procesar_añadir_usuario.php" method="POST">
+                <label for="nickname">Nickname:</label>
+                <input type="text" name="nickname" id="nickname" required>
+
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
+
+                <label for="password">Contraseña:</label>
+                <input type="password" name="password" id="password" required>
+
+                <button type="submit">Añadir Usuario</button>
+            </form>
+        </div>
+        </section>
+    </main>
+</body>
+</html>
