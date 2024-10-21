@@ -8,14 +8,15 @@ class UsuarioBD {
         $this->conexion = $db->get_conexion();
     }
 
-    public function insertarUsuario($nickname, $email, $password) {
+    public function insertarUsuario($nickname, $email, $password, $path) {
 
-        $sql = "INSERT INTO usuarios (nickname, email, password) VALUES (:nickname, :email, :password)";
+        $sql = "INSERT INTO usuarios (nickname, email, password) VALUES (:nickname, :email, :password, :img)";
         $stmt = $this->conexion->prepare($sql);
         
         $stmt->bindParam(':nickname', $nickname);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password); 
+        $stmt->bindParam(':img', $path); 
         
         if ($stmt->execute()){
             echo "<h2> Usuario insertado correctamente. </h2>";

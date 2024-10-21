@@ -20,7 +20,68 @@ include_once 'inc/Juego.php';
 include_once 'inc/Mazo.php';
 include_once 'inc/Jugador.php';
 
+
+function generar_carta($carta) {
+
+            $numero_carta = strval(rand(1,30));
+
+            $ruta_carta = "img/cards/" . $numero_carta . "_card.jpg";
+
+            $im = imagecreatefromjpeg($ruta_carta);
+
+            $negro = imagecolorallocate($im, 0, 0,0);
+
+            //Incluir la bola de defensa en la carta
+
+            $bola_ataque = imagecreatefrompng("img/circulo_ataque.png");
+            $bola_defensa = imagecreatefrompng("img/circulo_defensa.png");
+            
+            $sx_defensa = imagesx($bola_defensa);
+            $sy_defensa = imagesy($bola_defensa);
+
+            $margen_dcho = 10;
+            $margen_inf = 10;
+
+            $fuente = 'fonts/riesling.ttf';
+
+            //Incluir texto de defensa
+
+            imagettftext($bola_defensa, 30, 0, 20, 40, $negro, $fuente, $carta->getDefensa());
+
+            //Incluir texto de ataque
+
+            imagettftext($bola_ataque, 30, 0, 20, 40, $negro, $fuente, $carta->getAtaque());
+
+            imagecopy($im, $bola_defensa,
+            imagesx($im) - $sx_defensa - $margen_dcho,
+            imagesy($im) - $sy_defensa - $margen_inf, 0,
+            0,$sx_defensa, $sy_defensa);
+
+            //incluir la bola de ataque en al carta.
+
+            $sx_ataque = imagesx($bola_ataque);
+            $sy_ataque = imagesy($bola_ataque);
+
+            imagecopy($im, $bola_ataque,10,
+            imagesy($im) - $sy_ataque - 10, 0,
+                0, $sx_ataque, $sy_ataque);
+
+            //asignar ruta y liberar memoria.
+
+            imagejpeg($im, $ruta_carta);
+
+            imagedestroy($im);
+            imagedestroy($bola_defensa);
+            imagedestroy($bola_ataque);
+            
+            return $ruta_carta;
+    
+}
+
+
 session_start();
+
+$ruta_carta = "";
 
 $obj_conexion = new Conexion();
 $conexion = $obj_conexion->get_conexion();
@@ -28,18 +89,17 @@ $conexion = $obj_conexion->get_conexion();
 //Insertar cartas en la BD
 
     $conexion->query('DELETE FROM cartas WHERE 1');
-    $conexion->query('INSERT INTO cartas VALUES (1, "Hola", 10, 20, null)');
-    $conexion->query('INSERT INTO cartas VALUES (2, "Hola", 10, 20, null)');
-    $conexion->query('INSERT INTO cartas VALUES (3, "Hola", 10, 20, null)');
-    $conexion->query('INSERT INTO cartas VALUES (4, "Hola", 10, 20, null)');
-    $conexion->query('INSERT INTO cartas VALUES (5, "Hola", 10, 20, null)');
-    $conexion->query('INSERT INTO cartas VALUES (6, "Hola", 10, 20, null)');
-    $conexion->query('INSERT INTO cartas VALUES (7, "Hola", 10, 20, "Poderduro")');
-    $conexion->query('INSERT INTO cartas VALUES (8, "Hola", 10, 20, "Poderduro")');
-    $conexion->query('INSERT INTO cartas VALUES (9, "Hola", 10, 20, "Poderduro")');
-    $conexion->query('INSERT INTO cartas VALUES (10, "Hola", 10, 20, "Poderduro")');
-
-
+    $conexion->query('INSERT INTO cartas VALUES (1, "Dragón de fuego", 15, 25, null)');
+    $conexion->query('INSERT INTO cartas VALUES (2, "Guerrero de la luz", 12, 30, null)');
+    $conexion->query('INSERT INTO cartas VALUES (3, "Maga oscura", 8, 15, null)');
+    $conexion->query('INSERT INTO cartas VALUES (4, "Caballero valiente", 10, 20, null)');
+    $conexion->query('INSERT INTO cartas VALUES (5, "Bestia salvaje", 14, 18, null)');
+    $conexion->query('INSERT INTO cartas VALUES (6, "Hechizo de curación", 0, 0, null)');
+    $conexion->query('INSERT INTO cartas VALUES (7, "Fénix resplandeciente", 20, 30, "Renacer")');
+    $conexion->query('INSERT INTO cartas VALUES (8, "Golem de piedra", 18, 25, "Fortaleza")');
+    $conexion->query('INSERT INTO cartas VALUES (9, "Sombra furtiva", 10, 5, "Sigilo")');
+    $conexion->query('INSERT INTO cartas VALUES (10, "Gigante de hielo", 22, 28, "Congelación")');
+    
 /*
 
 2) Mostrar todos ordenados por número de ataque descendente
@@ -155,7 +215,7 @@ if (isset($_GET['accion'])) {
 
     if ($accion === 'reiniciar') {
         session_destroy();
-        header("Location: index.php");
+        header("Location: vsgame.php");
         exit();
     }
     
@@ -175,15 +235,17 @@ $ronda = $_SESSION['ronda'];
         
         <div class="carta1">
             <p><?php if ($cartaJugador != null) { echo $cartaJugador; } ?></p>
-            <img class="carta1" src="<?php echo "img/cards/" . strval(rand(1,30)) . "_card.jpg" ?>">
             
+            <img class="carta1" src="<?php if ($cartaJugador != null) { echo generar_carta($cartaJugador);} ?>" />
+
         </div>
 
         <img src="img/vs.png" style="height: 12vh; margin-top: 150px;">
 
         <div class="carta2">
             <p><?php  if ($cartaMaquina != null) { echo $cartaMaquina; } ?></p>
-            <img class="carta1" src="<?php echo "img/cards/" . strval(rand(1,30)) . "_card.jpg" ?>">
+            
+            <img class="carta1" src="<?php if ($cartaJugador != null) { echo generar_carta($cartaJugador);} ?>" />
             
         </div>
 
