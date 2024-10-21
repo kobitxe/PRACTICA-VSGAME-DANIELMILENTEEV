@@ -18,6 +18,9 @@
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" required>
 
+            <input type="checkbox" name="remember">
+            <label>Recordar contraseña</label>
+
             <button type="submit">Entrar</button>
             
         </form>
