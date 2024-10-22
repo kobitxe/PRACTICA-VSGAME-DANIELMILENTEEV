@@ -10,7 +10,7 @@ class UsuarioBD {
 
     public function insertarUsuario($nickname, $email, $password, $path) {
 
-        $sql = "INSERT INTO usuarios (nickname, email, password) VALUES (:nickname, :email, :password, :img)";
+        $sql = "INSERT INTO usuarios (nickname, email, password, img) VALUES (:nickname, :email, :password, :img)";
         $stmt = $this->conexion->prepare($sql);
         
         $stmt->bindParam(':nickname', $nickname);
@@ -21,6 +21,10 @@ class UsuarioBD {
         if ($stmt->execute()){
             echo "<h2> Usuario insertado correctamente. </h2>";
             echo '<a href="userAdd.html">Volver a la página principal</a>';
+            return true;
+        }
+        else {
+            return false;
         }
 
     }
@@ -39,6 +43,7 @@ class UsuarioBD {
     echo '<td> NICKNAME </td>';
     echo '<td> EMAIL </td>';
     echo '<td> PASSWORD </td>';
+    echo '<td> IMAGEN </td>';
     echo '<td> EDITAR </td>';
     echo '<td> ELIMINAR </td>';
     echo '</tr>';
@@ -50,6 +55,7 @@ class UsuarioBD {
         echo '<td>' . $usuario['nickname']. '</td>';
         echo '<td>' . $usuario['email']. '</td>';
         echo '<td>' . $usuario['password']. '</td>';
+        echo '<td><img height ="60px" src=\'' . $usuario['img']. '\'></td>';
         echo '<td> <button onclick="location.href=\'userEdit.php?id='. $usuario['id'].'\'"> Editar </button></td>';
         echo '<td> <button class="eliminar" onclick="location.href=\'procesar_eliminar_user.php?id=' . $usuario['id'].'\'"> Eliminar </button> </td>';
         echo '</tr>';

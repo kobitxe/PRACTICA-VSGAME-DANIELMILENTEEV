@@ -4,41 +4,23 @@ require_once '../../models/UsuarioBD.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    if ($_FILES['img']['error'] == UPLOAD_ERR_INI_SIZE) {
-        echo "El archivo supera el tamaño máximo permitido por el servidor.";
-        exit();
-    }
 
-    echo '<pre>';
-    print_r($_FILES);
-    echo '</pre>';
-    
     if (!empty($_POST['nickname']) && !empty($_POST['password']) && !empty($_POST['email']) && isset($_FILES['img']) && $_FILES['img']['error'] == UPLOAD_ERR_OK) {
-        
+    
         $nickname = $_POST['nickname'];
         $password = md5($_POST['password']); 
         $email = $_POST['email'];
 
-        $imgTmpPath = $_FILES['img']['tmp_name'];
-        $imgName = basename($_FILES['img']['name']);
-        $imgPath = './uploads/imagenes/' . $imgName;
+        $ruta_temporal = $_FILES['img']['tmp_name'];
         
-        if (move_uploaded_file($imgTmpPath, $imgPath)) {
+        $nombre_imagen = basename($_FILES['img']['name']);
+        
+        $ruta_final = './uploads/imagenes/' . $nombre_imagen;
+        
+        move_uploaded_file($ruta_temporal, $ruta_final);
             
-            $usuariodb = new UsuarioBD();
-            $result = $usuariodb->insertarUsuario($nickname, $email, $password, $imgPath);
-            
-            if ($result) {
-                echo "Usuario registrado con éxito.";
-                echo '<a href="userAdd.html">Volver a añadir</a>';
-            } 
-            
-            else {
-                echo "Error al registrar el usuario.";
-            }
-        } else {
-            echo "Error al subir la imagen.";
-        }
+        $userdb = new UsuarioBD();
+        $result = $userdb->insertarUsuario($nickname, $email, $password, $ruta_final);
         
     } 
     
