@@ -55,7 +55,7 @@ class UsuarioBD {
         echo '<td>' . $usuario['nickname']. '</td>';
         echo '<td>' . $usuario['email']. '</td>';
         echo '<td>' . $usuario['password']. '</td>';
-        echo '<td><img height ="60px" src=\'' . $usuario['img']. '\'></td>';
+        echo '<td><img height ="60px" src=\'./uploads/imagenes/' . $usuario['img']. '\'></td>';
         echo '<td> <button onclick="location.href=\'userEdit.php?id='. $usuario['id'].'\'"> Editar </button></td>';
         echo '<td> <button class="eliminar" onclick="location.href=\'procesar_eliminar_user.php?id=' . $usuario['id'].'\'"> Eliminar </button> </td>';
         echo '</tr>';

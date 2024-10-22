@@ -1,4 +1,7 @@
-<?php include './../header.php'; ?>
+<?php 
+include './../header.php';
+include './../../models/CartasBD.php'; 
+?>
 
     <main>
         <section class="dashboard-info">
@@ -10,7 +13,7 @@
                 require_once (__DIR__ . '/../../config/Conexion.php');
 
                 $carta_encontrada = null;
-
+                
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_GET['id'])) {
 
                     if (isset($_POST['id'])) {
@@ -21,18 +24,13 @@
                         $id = $_GET['id'];
                     }
                 
-                    $conn = new Conexion();
-                    $conexion = $conn->get_conexion();
-
-                    $sql = "SELECT * FROM cartas WHERE id = :id";
-                    $stmt = $conexion->prepare($sql);
-                    $stmt->bindParam(':id', $id);
-                    $stmt->execute();
-                    $carta_encontrada = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $cartasDB = new CartasBD();
+                    $carta_encontrada = $cartasDB->obtenerCartaPorID($id);
 
                 if ($carta_encontrada) {
 
                         echo '<h2>Carta con ID ' . $carta_encontrada['id'] . '</h2>';
+                        if(isset($_GET['mensaje_error'])){echo "<a>" . $_GET['mensaje_error'] . "</a>";}
                         echo '<form action="procesar_carta_edit.php" method="POST">';
                         echo '<input type="hidden" name="id" value="' . $carta_encontrada['id'] . '">';
                         echo '<br><br>Nombre: <input type="text" name="new_nombre" value="' . $carta_encontrada['nombre'] . '">';

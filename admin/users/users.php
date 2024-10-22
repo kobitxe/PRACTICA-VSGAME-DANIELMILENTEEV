@@ -4,6 +4,9 @@
 <section class="dashboard-info">
           
 <h2>Listado de usuarios</h2>
+
+<button onclick="window.location.href='userAdd.php'">Añadir Usuario</button>
+<br><br>
            
 <?php
 

@@ -1,6 +1,5 @@
 <?php 
-
-require_once '../../config/Conexion.php';
+include './../../models/CartasBD.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -12,36 +11,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id']; 
 
     if (empty($nombre) || empty($ataque) || empty($defensa)) {
-        echo 'Completa todos los campos necesarios.';
-        echo '<a href="cardEdit.php?id=' .$id. '">Volver a editar</a>';
+        header ("Location: cardEdit.php?id=". $id . "&mensaje_error=Complete todos los campos necesarios.");
         exit;
     }
 
-    $conn = new Conexion();
-    $conexion = $conn->get_conexion();
-
-    $sql = "UPDATE cartas SET nombre = :nombre, ataque = :ataque, defensa = :defensa, poder_especial = :poder_especial, img = :img WHERE id = :id";
-    $stmt = $conexion->prepare($sql);
+    $cartasDB = new CartasBD();
+    $update = $cartasDB->ActualizarCarta($id, $nombre, $ataque, $defensa, $poder_especial, $imagen);
         
-    $stmt->bindParam(':id', $id);
-    $stmt->bindParam(':nombre', $nombre);
-    $stmt->bindParam(':ataque', $ataque);
-    $stmt->bindParam(':defensa', $defensa);
-    $stmt->bindParam(':img', $imagen);
-    $stmt->bindParam(':poder_especial', $poder_especial);
-    
-        
-    if ($stmt->execute()){
-        echo "<h2> Carta editada correctamente. </h2>";
-        echo '<a href="cards.php">Editar otra carta</a>';
-        exit();
+    if ($update) {
+        header ("Location: cards.php?mensaje=Carta actualizada correctamente.");
+        exit;
     }
-
     else {
-        echo "<h2> Error al editar carta. </h2>";
-        echo '<a href="cards.php">Editar otra carta</a>';
+        header ("Location: cardEdit.php?id=". $id . "&mensaje_error=Error al actualizar la carta.");
+        exit;
     }
-        
 
 }
 

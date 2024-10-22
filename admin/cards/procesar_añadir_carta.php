@@ -1,8 +1,6 @@
 <?php 
 
-require_once '../../models/UsuarioBD.php';
-require_once '../../config/Conexion.php';
-
+require_once '../../models/CartasBD.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -12,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nombre = $_POST['nombre'];
         $ataque = $_POST['ataque']; 
         $defensa = $_POST['defensa'];
+        $poder_especial = $_POST['poder_especial'];
 
         $ruta_temporal = $_FILES['img']['tmp_name'];
         
@@ -21,32 +20,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         move_uploaded_file($ruta_temporal, $ruta_final);
 
-        $conexion = new Conexion();
-        $con = $conexion->get_conexion();
+        $cartasDB = new CartasBD();
+        $anyadir = $cartasDB->insertarUsuario($nombre, $ataque, $defensa, $poder_especial, $nombre_imagen);
  
-        $sql = "INSERT INTO cartas (nombre, ataque, defensa, img) VALUES (:nombre, :ataque, :defensa, :img)";
-        $stmt = $con->prepare($sql);
-        
-        $stmt->bindParam(':nombre', $nombre);
-        $stmt->bindParam(':ataque', $ataque);
-        $stmt->bindParam(':defensa', $defensa); 
-        $stmt->bindParam(':img', $nombre_imagen); 
-        
-        if ($stmt->execute()){
-            echo "<h2> Carta insertada correctamente. </h2>";
-            echo '<a href="cardAdd.php">Volver a la página principal</a>';
-            
+        if ($anyadir){
+            header ("Location: cards.php?mensaje=Carta insertada correctamente.");
+            exit;
         }
+
         else {
-            echo "<h2> Error al insertar carta. </h2>";
-            echo '<a href="cardAdd.php">Volver a la página principal</a>';
+            header ("Location: cards.php?mensaje=Error al insertar carta.");
+            exit;
         }
         
     } 
     
     else {
-        echo "Todos los campos son obligatorios.";
-        echo '<a href="cardAdd.php">Volver a añadir</a>';
+        header ("Location: cardAdd.php?mensaje=Todos los campos son obligatorios, intentelo de nuevo.");
+        exit;
     }
 }
 
