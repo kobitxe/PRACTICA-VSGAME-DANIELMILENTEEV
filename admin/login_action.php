@@ -18,10 +18,13 @@ function validarLogin($email, $password) {
         if($usuario["email"] == $email) {
 
             if ($usuario["password"] == $password) { 
+
                 $_SESSION['usuario'] = $usuario['nickname'];
 
-                if (isset($_POST['remember']) && $_POST['remember'] == 1) {
+                if (isset($_POST['remember'])) {
+
                     setcookie('usuario', $usuario['nickname'], time() + (86400 * 30), "/"); 
+            
                 }
 
                 header('Location: dashboard.php');
@@ -32,18 +35,16 @@ function validarLogin($email, $password) {
         }
     }
 
-    echo "Credenciales incorrectas, intentelo de nuevo.";
-    echo '<a href="login.php"> Volver a intentar. </a>';
+    header('Location: login.php?error=Credenciales incorrectas, intentelo de nuevo.');   
 
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $user = $_POST['username'];
     $password = md5($_POST['password']);
 
 validarLogin($user, $password);
-
-
 
 }
 

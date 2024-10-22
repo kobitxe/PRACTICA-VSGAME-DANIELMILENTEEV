@@ -160,3 +160,25 @@ button:hover {
 .eliminar:hover {
     background-color: #960000;
 }
+
+a {
+
+    color: red;
+
+}
+
+.recordar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%; 
+    height: 100%;
+}
+
+.recordar-texto {
+    flex: 0 0 20%; 
+}
+
+.recordar-check {
+    flex: 0 0 80%; 
+}

@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindParam(':nombre', $nombre);
         $stmt->bindParam(':ataque', $ataque);
         $stmt->bindParam(':defensa', $defensa); 
-        $stmt->bindParam(':img', $ruta_final); 
+        $stmt->bindParam(':img', $nombre_imagen); 
         
         if ($stmt->execute()){
             echo "<h2> Carta insertada correctamente. </h2>";
