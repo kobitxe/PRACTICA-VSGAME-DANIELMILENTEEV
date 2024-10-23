@@ -65,6 +65,14 @@ class CartasBD {
         
         echo '</table>';
     }
+
+    public function obtenerArray() {
+        $sql = "SELECT * FROM cartas";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+    }
+    
     public function ActualizarCarta($id, $nombre, $ataque, $defensa, $poder_especial, $imagen) {
         
         $sql = "UPDATE cartas SET nombre = :nombre, ataque = :ataque, defensa = :defensa, poder_especial = :poder_especial, img = :img WHERE id = :id";

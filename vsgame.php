@@ -88,17 +88,18 @@ $conexion = $obj_conexion->get_conexion();
 
 //Insertar cartas en la BD
 
-    $conexion->query('DELETE FROM cartas WHERE 1');
-    $conexion->query('INSERT INTO cartas VALUES (1, "Dragón de fuego", 15, 25, null)');
-    $conexion->query('INSERT INTO cartas VALUES (2, "Guerrero de la luz", 12, 30, null)');
-    $conexion->query('INSERT INTO cartas VALUES (3, "Maga oscura", 8, 15, null)');
-    $conexion->query('INSERT INTO cartas VALUES (4, "Caballero valiente", 10, 20, null)');
-    $conexion->query('INSERT INTO cartas VALUES (5, "Bestia salvaje", 14, 18, null)');
-    $conexion->query('INSERT INTO cartas VALUES (6, "Hechizo de curación", 0, 0, null)');
-    $conexion->query('INSERT INTO cartas VALUES (7, "Fénix resplandeciente", 20, 30, "Renacer")');
-    $conexion->query('INSERT INTO cartas VALUES (8, "Golem de piedra", 18, 25, "Fortaleza")');
-    $conexion->query('INSERT INTO cartas VALUES (9, "Sombra furtiva", 10, 5, "Sigilo")');
-    $conexion->query('INSERT INTO cartas VALUES (10, "Gigante de hielo", 22, 28, "Congelación")');
+$conexion->query('DELETE FROM cartas WHERE 1');
+
+$conexion->query('INSERT INTO cartas (id, nombre, ataque, defensa, poder_especial, img) VALUES (1, "Dragón de fuego", 15, 25, null, "1.jpg")');
+$conexion->query('INSERT INTO cartas (id, nombre, ataque, defensa, poder_especial, img) VALUES (2, "Guerrero de la luz", 12, 30, null, "1.jpg")');
+$conexion->query('INSERT INTO cartas (id, nombre, ataque, defensa, poder_especial, img) VALUES (3, "Maga oscura", 8, 15, null, "1.jpg")');
+$conexion->query('INSERT INTO cartas (id, nombre, ataque, defensa, poder_especial, img) VALUES (4, "Caballero valiente", 10, 20, null, "1.jpg")');
+$conexion->query('INSERT INTO cartas (id, nombre, ataque, defensa, poder_especial, img) VALUES (5, "Bestia salvaje", 14, 18, null, "1.jpg")');
+$conexion->query('INSERT INTO cartas (id, nombre, ataque, defensa, poder_especial, img) VALUES (6, "Hechizo de curación", 0, 0, null, "1.jpg")');
+$conexion->query('INSERT INTO cartas (id, nombre, ataque, defensa, poder_especial, img) VALUES (7, "Fénix resplandeciente", 20, 30, "Renacer", "1.jpg")');
+$conexion->query('INSERT INTO cartas (id, nombre, ataque, defensa, poder_especial, img) VALUES (8, "Golem de piedra", 18, 25, "Fortaleza", "1.jpg")');
+$conexion->query('INSERT INTO cartas (id, nombre, ataque, defensa, poder_especial, img) VALUES (9, "Sombra furtiva", 10, 5, "Sigilo", "1.jpg")');
+$conexion->query('INSERT INTO cartas (id, nombre, ataque, defensa, poder_especial, img) VALUES (10, "Gigante de hielo", 22, 28, "Congelación", "1.jpg")');
     
 /*
 
@@ -227,7 +228,7 @@ $ronda = $_SESSION['ronda'];
 
 ?>
 
-<button class = "btn-anyadir-personaje" onclick = "window.location.href='./anyadir_personaje.php'"> Añadir Personaje </button>
+<!-- <button class = "btn-anyadir-personaje" onclick = "window.location.href='./anyadir_personaje.php'"> Añadir Personaje </button> -->
 
 <div class = "pant-juego"> 
 
