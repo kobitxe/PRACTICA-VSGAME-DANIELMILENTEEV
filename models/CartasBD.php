@@ -36,17 +36,16 @@ class CartasBD {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
         
-        echo '<table border = 1px>';
+        echo '<table border = 1px style="border-collapse: collapse; text-align: center;">';
         
-        echo '<tr>';
-        echo '<td> ID </td>';
-        echo '<td> NOMBRE </td>';
-        echo '<td> ATAQUE </td>';
-        echo '<td> DEFENSA </td>';
-        echo '<td> PODER ESPECIAL </td>';
-        echo '<td> IMAGEN </td>';
-        echo '<td> EDITAR </td>';
-        echo '<td> ELIMINAR </td>';
+        echo '<tr >';
+        echo '<td style="padding: 10px"> ID </td>';
+        echo '<td style="padding: 10px"> NOMBRE </td>';
+        echo '<td style="padding: 10px"> ATAQUE </td>';
+        echo '<td style="padding: 10px"> DEFENSA </td>';
+        echo '<td style="padding: 10px"> PODER ESPECIAL </td>';
+        echo '<td style="padding: 10px"> IMAGEN </td>';
+        echo '<td style="padding: 10px"> ACCIONES </td>';
         echo '</tr>';
         
         foreach ($result as $carta) {
@@ -57,10 +56,9 @@ class CartasBD {
             echo '<td>' . $carta['ataque']. '</td>';
             echo '<td>' . $carta['defensa']. '</td>';
             echo '<td>' . $carta['poder_especial']. '</td>';
-            echo '<td><img height="60px" src=\'./uploads/imagenes/' . $carta['img']. '\'></td>';
-            echo '<td> <button onclick="window.location.href=\'cardEdit.php?id=' . $carta['id'] . '\'"> Editar </button></td>';
-            echo '<td> <button class="eliminar" onclick="window.location.href=\'procesar_eliminar_carta.php?id=' . $carta['id'] . '\'"> Eliminar </button> </td>';
-            echo '</tr>';
+            echo '<td ><img height="60px" src=\'./uploads/imagenes/' . $carta['img']. '\'></td>';
+            echo '<td style="padding: 10px"> <button onclick="window.location.href=\'cardEdit.php?id=' . $carta['id'] . '\'"> Editar </button> <button class="eliminar" onclick="window.location.href=\'procesar_eliminar_carta.php?id=' . $carta['id'] . '\'"> Eliminar </button> </td>';
+            echo '</tr>'; 
         }
         
         echo '</table>';

@@ -36,7 +36,7 @@ class UsuarioBD {
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
     
-    echo '<table border = 1px>';
+    echo '<table border = 1px >';
 
     echo '<tr>';
     echo '<td> ID </td>';
@@ -44,8 +44,7 @@ class UsuarioBD {
     echo '<td> EMAIL </td>';
     echo '<td> PASSWORD </td>';
     echo '<td> IMAGEN </td>';
-    echo '<td> EDITAR </td>';
-    echo '<td> ELIMINAR </td>';
+    echo '<td> ACCIONES </td>';
     echo '</tr>';
 
     foreach ($result as $usuario) {
@@ -56,8 +55,7 @@ class UsuarioBD {
         echo '<td>' . $usuario['email']. '</td>';
         echo '<td>' . $usuario['password']. '</td>';
         echo '<td><img height ="60px" src=\'./uploads/imagenes/' . $usuario['img']. '\'></td>';
-        echo '<td> <button onclick="location.href=\'userEdit.php?id='. $usuario['id'].'\'"> Editar </button></td>';
-        echo '<td> <button class="eliminar" onclick="location.href=\'procesar_eliminar_user.php?id=' . $usuario['id'].'\'"> Eliminar </button> </td>';
+        echo '<td style= "padding: 10px;"> <button onclick="location.href=\'userEdit.php?id='. $usuario['id'].'\'"> Editar </button> <button class="eliminar" onclick="location.href=\'procesar_eliminar_user.php?id=' . $usuario['id'].'\'"> Eliminar </button> </td>';
         echo '</tr>';
     }
 

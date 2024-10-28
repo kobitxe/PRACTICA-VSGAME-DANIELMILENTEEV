@@ -7,7 +7,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ataque = $_POST['new_ataque'];  
     $defensa = $_POST['new_defensa'];  
     $poder_especial = $_POST['new_poderespecial'];  
-    $imagen = $_POST['new_img'];
+    
+    if($_POST['new_img'] != ""){
+        $imagen = $_POST['new_img'];
+    }
+    else {
+        $imagen = $_POST['old_img'];
+    }
+
     $id = $_POST['id']; 
 
     if (empty($nombre) || empty($ataque) || empty($defensa)) {

@@ -33,11 +33,14 @@ include './../../models/CartasBD.php';
                         if(isset($_GET['mensaje_error'])){echo "<a>" . $_GET['mensaje_error'] . "</a>";}
                         echo '<form action="procesar_carta_edit.php" method="POST">';
                         echo '<input type="hidden" name="id" value="' . $carta_encontrada['id'] . '">';
+                        echo '<input type="hidden" name="old_img" value="' . $carta_encontrada['img'] . '">';
                         echo '<br><br>Nombre: <input type="text" name="new_nombre" value="' . $carta_encontrada['nombre'] . '">';
                         echo ' <br><br>Ataque: <input type="text" name="new_ataque" value="' . $carta_encontrada['ataque'] . '">';
                         echo ' <br><br>Defensa: <input type="text" name="new_defensa" value="' . $carta_encontrada['defensa'] . '">';
                         echo ' <br><br>Poder Especial: <input type="text" name="new_poderespecial" value="' . $carta_encontrada['poder_especial'] . '">';
-                        echo ' <br><br>Nombre de imagen: <input type="text" name="new_img" value="' . $carta_encontrada['img'] . '">';
+                        echo '<label for="img">Imagen:</label> ';
+                        echo '<input type="file" name="new_img" id="img" accept="image/*">';
+                        echo '<br><br><img height=200px src=\'./uploads/imagenes/' . $carta_encontrada['img'] . '\'>';
                         echo '<br><br> <button type="submit">Aplicar cambios</button>';
                         echo '</form>';
 
