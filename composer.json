@@ -1,0 +1,19 @@
+{
+    "name": "daniel/practica-vsgame-danielmilenteev",
+    "description": "VSGAME-DAW",
+    "require": {
+        "tecnickcom/tcpdf": "^6.7",
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Daniel\\PracticaVsgameDanielmilenteev\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel Milenteev",
+            "email": "daniel.milenteev@gmail.com"
+        }
+    ]
+}

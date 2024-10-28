@@ -1,9 +1,9 @@
 <?php 
 
-include './../../tcpdf/config/tcpdf_config.php';
-include './../../tcpdf/tcpdf.php';
+require './../../vendor/autoload.php';
 include './../../models/CartasBD.php';
 
+use TCPDF;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdf = new TCPDF();
@@ -70,13 +70,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $html .= '<td>' . $carta['ataque'] . '</td>'; 
         $html .= '<td>' . $carta['defensa'] . '</td>'; 
         $html .= '<td>' . $carta['poder_especial'] . '</td>'; 
-        $html .= '<td><img height="60px" src="./uploads/imagenes/' . $carta['img'] . '"></td>'; // Ajustar según sea necesario
+        $html .= '<td><img height="60px" src="./uploads/imagenes/' . $carta['img'] . '"></td>'; 
         $html .= '</tr>';
     }
 
     $html .= '</table></body></html>';
 
-    $pdf->writeHTML($html, true, false, true,'');
+    $pdf->writeHTML($html, true, false, true,);
 
     $pdf->Output('Informe de Cartas.pdf','I');
     exit(); 
