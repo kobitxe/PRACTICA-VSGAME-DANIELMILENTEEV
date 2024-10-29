@@ -117,13 +117,14 @@ include './../header.php';
           
             <h2>Listado de cartas</h2>
 
-            <p><?php if(isset($_GET['mensaje'])){echo $_GET['mensaje'];}?></p>
+            <p class="mensaje"><?php if(isset($_GET['mensaje'])){echo $_GET['mensaje'];}?></p>
 
-            <button onclick="window.location.href='cardAdd.php'">Añadir Carta</button>
-            <br><br>
-            <form method="POST">
-            <button type="submit">Descargar PDF</button>
-            </form>
+            <div class="botones-accion">
+                <button onclick="window.location.href='cardAdd.php'">Añadir Carta</button>
+                <form method="POST">
+                    <button type="submit">Descargar PDF</button>
+                </form>
+            </div> 
 
             
         <?php 

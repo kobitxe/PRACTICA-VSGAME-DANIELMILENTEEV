@@ -90,6 +90,7 @@ header nav ul li a:hover {
 
 main {
     padding: 2rem;
+    min-width: 750px;
 }
 
 .dashboard-info {
@@ -110,7 +111,7 @@ main {
 
 
 .form-container {
-    width: 300px;
+    width: 600px;
     margin: 100px auto;
     padding: 20px;
     background-color: #fff;
@@ -147,6 +148,9 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
@@ -155,6 +159,7 @@ button:hover {
 
 .eliminar {
     background-color: red;
+    transition: background-color 0.3s ease;
 }
 
 .eliminar:hover {
@@ -185,15 +190,63 @@ a {
 
 table, tr, td {
     text-align: center;
+    border: 1px solid #ddd;
+}
+
+.mensaje {
+    text-align: center;
 }
 
 table {
+    
+    width: 100%;
     border-collapse: collapse;
-    padding: 10px;
     margin: 0 auto;
+    font-size: 16px;
+    text-align: left;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    max-width: 1000px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+td img {
+    border-radius: 5px;
 }
 
 footer {
     text-align: center;
+}
+
+.botones-accion {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.botones-accion button {
+    padding: 10px 20px;
+    background-color: rgb(119, 94, 94);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 150px; 
+    text-align: center;
+}
+
+.botones-accion button:hover {
+    background-color: rgb(139, 114, 114); 
+}
+
+#user-dashboard-info {
+    min-width: 900px;
 }
 

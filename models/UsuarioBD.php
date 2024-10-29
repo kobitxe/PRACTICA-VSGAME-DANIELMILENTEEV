@@ -19,10 +19,10 @@ class UsuarioBD {
         $stmt->bindParam(':img', $path); 
         
         if ($stmt->execute()){
-            echo "<h2> Usuario insertado correctamente. </h2>";
-            echo '<a href="userAdd.html">Volver a la página principal</a>';
+            header("Location: users.php?mensaje=Usuario añadido correctamente");
             return true;
-        }
+         }
+
         else {
             return false;
         }
@@ -36,15 +36,15 @@ class UsuarioBD {
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
     
-    echo '<table border = 1px >';
+    echo '<table class="user-table" border = 1px >';
 
     echo '<tr>';
-    echo '<td> ID </td>';
-    echo '<td> NICKNAME </td>';
-    echo '<td> EMAIL </td>';
-    echo '<td> PASSWORD </td>';
-    echo '<td> IMAGEN </td>';
-    echo '<td> ACCIONES </td>';
+    echo '<td style="padding: 10px"> ID </td>';
+    echo '<td style="padding: 10px"> NICKNAME </td>';
+    echo '<td style="padding: 10px"> EMAIL </td>';
+    echo '<td style="padding: 10px"> PASSWORD </td>';
+    echo '<td style="padding: 10px"> IMAGEN </td>';
+    echo '<td style="padding: 10px"> ACCIONES </td>';
     echo '</tr>';
 
     foreach ($result as $usuario) {
@@ -62,23 +62,25 @@ class UsuarioBD {
     echo '</table>';
 
     }
-    public function ActualizarUsuario($nickname, $email, $id) {
+    public function ActualizarUsuario($nickname, $email, $id, $password, $img) {
 
-        $sql = "UPDATE usuarios SET nickname = :nickname, email = :email WHERE id = :id";
+        $sql = "UPDATE usuarios SET nickname = :nickname, email = :email, password = :password, img = :img WHERE id = :id";
         $stmt = $this->conexion->prepare($sql);
         
         $stmt->bindParam(':nickname', $nickname);
         $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':img', $img);
         $stmt->bindParam(':id', $id);
         
         if ($stmt->execute()){
-           header("Location: userEdit.php");
-           exit();
+           header("Location: users.php?mensaje=Usuario actualizado correctamente");
+           return true;
         }
 
         else {
-            echo "<h2> Error al editar usuario. </h2>";
-            echo '<a href="users.php">Editar otro usuario</a>';
+            header("Location: users.php?mensaje=Error al editar el usuario");
+            return false;
         }
         
     }
@@ -91,13 +93,13 @@ class UsuarioBD {
         $stmt->bindParam(':id', $id);
         
         if ($stmt->execute()){
-           header("Location: users.php");
+           header("Location: users.php?mensaje=Usuario eliminado correctamente.");
            exit();
         }
     
         else {
-            echo "<h2> Error al eliminar usuario. </h2>";
-            echo '<a href="userEdit.php">Eliminar otro usuario</a>';
+            header("Location: users.php?mensaje=Error al eliminar usuario.");
+           exit();
         }
         
     }
