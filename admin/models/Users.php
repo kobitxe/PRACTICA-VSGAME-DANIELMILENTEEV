@@ -1,6 +1,6 @@
 <?php 
 
-require_once(__DIR__ . '/../config/Conexion.php');
+require_once __DIR__ . '/../config/config.php';
 class UsuarioBD {
     private $conexion;
     public function __construct() {
@@ -19,7 +19,7 @@ class UsuarioBD {
         $stmt->bindParam(':img', $path); 
         
         if ($stmt->execute()){
-            header("Location: users.php?mensaje=Usuario añadido correctamente");
+            header ("Location: http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php?controller=User&action=userList&mensaje=Usuario añadido correctamente.");
             return true;
          }
 
@@ -54,8 +54,8 @@ class UsuarioBD {
         echo '<td>' . $usuario['nickname']. '</td>';
         echo '<td>' . $usuario['email']. '</td>';
         echo '<td>' . $usuario['password']. '</td>';
-        echo '<td><img height ="60px" src=\'./uploads/imagenes/' . $usuario['img']. '\'></td>';
-        echo '<td style= "padding: 10px;"> <button onclick="location.href=\'userEdit.php?id='. $usuario['id'].'\'"> Editar </button> <button class="eliminar" onclick="location.href=\'procesar_eliminar_user.php?id=' . $usuario['id'].'\'"> Eliminar </button> </td>';
+        echo '<td><img height ="60px" src=http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/views/Users/uploads/imagenes/' . $usuario['img'] . '></td>';
+        echo '<td style= "padding: 10px;"> <button onclick="location.href=\'http:\/\/127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php?controller=User&action=editar_usuario&id='. $usuario['id'] . ' \'"> Editar </button> <button class ="eliminar" onclick="location.href=\'http:\/\/127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php?controller=User&action=borrar_usuario&id='. $usuario['id'] . ' \'"> Eliminar </button> </td>';
         echo '</tr>';
     }
 
@@ -74,12 +74,12 @@ class UsuarioBD {
         $stmt->bindParam(':id', $id);
         
         if ($stmt->execute()){
-           header("Location: users.php?mensaje=Usuario actualizado correctamente");
+            header ("Location: http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php?controller=User&action=userList&mensaje=Usuario actualizado correctamente");
            return true;
         }
 
         else {
-            header("Location: users.php?mensaje=Error al editar el usuario");
+            header ("Location: http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php?controller=User&action=userList&mensaje=Error al editar el usuario");
             return false;
         }
         
@@ -93,12 +93,12 @@ class UsuarioBD {
         $stmt->bindParam(':id', $id);
         
         if ($stmt->execute()){
-           header("Location: users.php?mensaje=Usuario eliminado correctamente.");
+            header ("Location: http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php?controller=User&action=userList&mensaje=Usuario eliminado correctamente.");
            exit();
         }
     
         else {
-            header("Location: users.php?mensaje=Error al eliminar usuario.");
+            header ("Location: http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php?controller=User&action=userList&mensaje=Error al eliminar usuario.");
            exit();
         }
         

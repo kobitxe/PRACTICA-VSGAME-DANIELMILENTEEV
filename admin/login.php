@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario'])) {
     
 }
 
-if(isset($_SESSION['usuario'])) header("Location: dashboard.php");
+if(isset($_SESSION['usuario'])) header("Location: http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php");
 
 ?>
 
@@ -21,7 +21,7 @@ if(isset($_SESSION['usuario'])) header("Location: dashboard.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="./assets/css/admin.css"> <!-- Archivo CSS externo -->
+    <link rel="stylesheet" href="http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/assets/css/admin.css"> 
 
 </head>
 

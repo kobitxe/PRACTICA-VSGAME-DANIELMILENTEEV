@@ -1,6 +1,6 @@
 <?php 
 
-require_once(__DIR__ . '/../config/Conexion.php');
+require_once(__DIR__ . '/../config/config.php');
 class CartasBD {
     private $conexion;
     public function __construct() {
@@ -8,7 +8,7 @@ class CartasBD {
         $this->conexion = $db->get_conexion();
     }
 
-    public function insertarUsuario($nombre, $ataque, $defensa, $poder_especial, $nombre_imagen) {
+    public function insertarCarta($nombre, $ataque, $defensa, $poder_especial, $nombre_imagen) {
 
         $sql = "INSERT INTO cartas (nombre, ataque, defensa, poder_especial, img) VALUES (:nombre, :ataque, :defensa, :poder_especial, :img)";
         $stmt = $this->conexion->prepare($sql);
@@ -55,9 +55,9 @@ class CartasBD {
             echo '<td>' . $carta['nombre']. '</td>';
             echo '<td>' . $carta['ataque']. '</td>';
             echo '<td>' . $carta['defensa']. '</td>';
-            echo '<td>' . $carta['poder_especial']. '</td>';
-            echo '<td ><img height="60px" src=\'./uploads/imagenes/' . $carta['img']. '\'></td>';
-            echo '<td style="padding: 10px"> <button onclick="window.location.href=\'cardEdit.php?id=' . $carta['id'] . '\'"> Editar </button> <button class="eliminar" onclick="window.location.href=\'procesar_eliminar_carta.php?id=' . $carta['id'] . '\'"> Eliminar </button> </td>';
+            echo '<td>' . $carta['poder_especial'] . ' </td>';
+            echo "<td><img height='60px' src='http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/views/Cards/uploads/imagenes/" . $carta['img'] . "'></td>";
+            echo '<td style="padding: 10px"> <button onclick="window.location.href=\'http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php?controller=Card&action=editarcarta&id=' . $carta['id'] . '\'"> Editar </button> <button class="eliminar" onclick="window.location.href=\'http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php?controller=Card&action=procesar_eliminar_carta&id=' . $carta['id'] . '\'"> Eliminar </button> </td>';
             echo '</tr>'; 
         }
         
@@ -123,5 +123,16 @@ class CartasBD {
         return $carta_encontrada;
 
     }
+
+    public function contarCartas() {
+
+        $sql = "SELECT COUNT(*) FROM cartas";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute();
+        $total = $stmt->fetchColumn(); 
+    
+        return $total;
+    }
+    
 }
 ?>

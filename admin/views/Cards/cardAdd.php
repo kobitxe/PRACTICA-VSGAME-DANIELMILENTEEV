@@ -1,11 +1,11 @@
-<?php include './../header.php'; ?>
+<?php require_once __DIR__ . '/../header.php'; ?>
 
     <main>
         <section class="dashboard-info">
            <div class="form-container">
             <h2>Añadir Carta</h2>
-            <a><?php if(isset($_GET['mensaje'])){echo $_GET['mensaje'];} ?></a>
-            <form action="procesar_añadir_carta.php" method="POST" enctype="multipart/form-data">
+            <a><?php if (isset($mensaje)) {echo $mensaje;} ?></a>
+            <form action="http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php?controller=Card&action=procesar_anyadir_carta" method="POST" enctype="multipart/form-data" novalidate>
 
                 <label for="nombre">Nombre:</label>
                 <input type="text" name="nombre" id="nombre" required>
@@ -29,5 +29,5 @@
         </div>
         </section>
     </main>
-</body>
-</html>
+
+<?php require_once __DIR__ . '/../footer.php'; ?>

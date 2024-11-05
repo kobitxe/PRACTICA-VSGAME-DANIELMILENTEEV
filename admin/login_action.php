@@ -1,6 +1,6 @@
 <?php
 
-require_once (__DIR__ . "/../config/Conexion.php");
+require_once (__DIR__ . "/config/config.php");
 
 session_start();
 function validarLogin($email, $password) {
@@ -27,7 +27,7 @@ function validarLogin($email, $password) {
             
                 }
 
-                header('Location: dashboard.php');
+                header('Location: http://127.0.0.1/daw/VSGAME-MVC-DANIELMILENTEEV/admin/index.php');
                 exit();
 
             }
